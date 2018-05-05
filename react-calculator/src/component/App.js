@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import Result from './Result';
-import ButtonLayoutContainer from './ButtonLayoutContainer';
+import ButtonLayoutPanel from './ButtonLayoutPanel';
 
 class App extends Component {
+
+	handleClick = (buttonName) => {
+		console.log('click', buttonName);
+	}
+
 	render() {
 		return (
 			<div className="App">
 				<Result />
-		        <ButtonLayoutContainer />
-       		</div>
+				<ButtonLayoutPanel 
+					clickHandler={this.handleClick}
+				/>
+			</div>
 		);
 	}
 }
