@@ -2,7 +2,7 @@
   "name": "react-calculator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://saadulde45.github.io/react-calculator",
+  "homepage": "http://saadulde45.github.io/react-calculator/build",
   "devDependencies": {
     "gh-pages": ""
   },
