@@ -7,23 +7,22 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			total: null,
-			nextNumber: null,
-			operation: null,
+			numberString: '0',
+			currentNumber: '0',
+			operation: null
 		};
 	}
 
 	handleClick = (buttonName) => {
-		console.log('click', buttonName);
 		this.setState(calculate(this.state, buttonName));
 	}
 
 	render() {
 		return (
 			<div className="App">
-				<Result>
-					{this.state.nextNumber || this.state.total || '0'}
-				</Result>
+				<Result
+					result={this.state.numberString || '0'}
+				/>
 				<ButtonLayoutPanel
 					clickHandler={this.handleClick}
 				/>
