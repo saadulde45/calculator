@@ -48,6 +48,7 @@ export default function calculate(obj, buttonName) {
     if (buttonName === '.') {
         
         if(obj.currentNumber === '0' && obj.numberString === '0') {
+            
             return {
                 numberString: "0" + buttonName,
                 currentNumber: "0" + buttonName,
@@ -73,8 +74,10 @@ export default function calculate(obj, buttonName) {
     */
     if (obj.operation || (buttonName !== '=' && obj.numberString.endsWith("."))) {
 
+        let sanitisedString = obj.numberString.substring(0, obj.numberString.length - 1);
+
         return {
-            numberString: obj.numberString.substring(0, obj.numberString.length - 1) + buttonName,
+            numberString: buttonName === '=' ? sanitisedString : sanitisedString + buttonName,
             currentNumber: '0',
             operation: buttonName
         }
@@ -83,7 +86,7 @@ export default function calculate(obj, buttonName) {
     if (buttonName === '=') {
 
         // Return empty when '=' is pressed with no operation
-        return (sanitisedString !== '0') ?
+        return (obj.numberString !== '0') ?
             {
                 numberString: operate(obj.numberString),
                 currentNumber: '0',
