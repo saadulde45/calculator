@@ -68,6 +68,11 @@ export default function calculate(obj, buttonName) {
         }
     }
 
+    // TODO - Yet to implement '+/-'
+    if (buttonName === Constants.NEGATE) {
+        return obj;
+    }
+
     /* When the user presses operation in quick succession -
      * Replace the previous operation with the current one
      * Assign the new operation to 'operation'
@@ -78,7 +83,7 @@ export default function calculate(obj, buttonName) {
         let sanitisedString = obj.numberString;
 
         // Avoid adding '=' when user directly clicks it after '.' and doesn't remove characters on multiple clicks of '='
-        if (obj.numberString.endsWith(Constants.DECIMAL) || Constants.ROW_OPERATION.includes(obj.numberString.slice(-1))) {
+        if (obj.numberString.endsWith(Constants.DECIMAL) || Constants.SUPPORTED_OPERATIONS.includes(obj.numberString.slice(-1))) {
             sanitisedString = obj.numberString.substring(0, obj.numberString.length - 1);
         }
 
