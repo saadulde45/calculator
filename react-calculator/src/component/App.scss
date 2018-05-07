@@ -3,6 +3,14 @@
     font-weight: normal;
 }
 
+@mixin flexbox() {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
 body {
     button {
         @include font;
@@ -11,7 +19,82 @@ body {
     @include font;
 
     font-size: 100%;
-    color: #000;
+    color: #fff;
     line-height: 1.0em;
     background-color: #f0f0f0 !important;
+    
+    #root {
+        @include flexbox();
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .container {
+        @include flexbox();
+        flex-direction: column;
+        height: 500px;
+        width: 300px;
+        background-color: #303030;
+        border-radius: 15px;
+        padding: 35px 35px;
+        .result-container {
+            @include flexbox();
+            flex-direction: column-reverse;
+            padding: 10px 5px;
+            height: 180px;
+            border-bottom: 1px solid #888888;
+            text-align: right;
+            margin: 0 15px;
+            .operation-list {
+                color: #888888;
+                font-size: 15px;
+                align-self: flex-end;
+                order: 2;
+                padding-right: 5px;
+            }
+            .result {
+                font-size: 65px;
+                line-height: 1.2em;
+                align-self: flex-end;
+                order: 1;
+            }
+        }
+        .button-container {
+            @include flexbox();
+            padding: 15px 0;
+
+            .button {
+                background-color: #303030;
+                border: none;
+                height: 60px;
+                width: 75px;
+                color: #888888;
+                font-size: 15px;
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
+            }
+        .number-container {
+            flex-basis: 75%;
+        }
+        .operation-container {
+            flex-basis: 22%;
+            flex-direction: column;
+            text-align: right;
+            .button {
+                color: #FF6364;
+            }
+            .equals {
+                color: #fff;
+                background-color: #FF6364;
+                border-radius: 30px;
+                width: 60px;
+                margin: 0 7px 0 7px;
+            }
+        }
+    }
+    }
 }
+

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 class Result extends React.Component {
     render() {
         return (
-            <div>
-                <div>
+            <div className="result-container">
+                <div className="operation-list">
                     {this.props.result}
                 </div>
-                <div>
+                <div className="result">
                     {this.props.current}
                 </div>
             </div>

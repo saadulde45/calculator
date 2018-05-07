@@ -8,8 +8,10 @@ class Button extends React.Component {
     }
 
     render() {
+        let applyClass = this.props.applyClass ? this.props.applyClass : '';
         return (
-            <button
+            <button 
+                className={"button " + applyClass}
                 onClick={this.handleClick}
             >
                 {this.props.name}

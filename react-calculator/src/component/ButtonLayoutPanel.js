@@ -11,36 +11,31 @@ class ButtonLayoutPanel extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="button-container">
                 {/* Number section */}
-                <section>
+                <section className="number-container">
                     {
-                        Constants.NUMBER_LAYOUT.map((row, index) => {
+                        Constants.NUMBER_LAYOUT.map((row) => {
                             return (
-                                <div key={index}>
-                                    {
-                                        row.map((button, index) => {
-                                            return (
-                                                <Button key={index} name={button} clickHandler={this.handleClick} />
-                                            );
-                                        })
-                                    }
-                                </div>
+                                row.map((button, index) => {
+                                    return (
+                                        <Button key={index} name={button} clickHandler={this.handleClick} />
+                                    );
+                                })
                             );
                         })
                     }
                 </section>
                 {/* Operation section */}
-                <section>
-                    <div>
-                        {
-                            Constants.ROW_OPERATION.map((button, index) => {
-                                return (
-                                    <Button name={button} key={index} clickHandler={this.handleClick} />
-                                );
-                            })
-                        }
-                    </div>
+                <section className="operation-container">
+                    {
+                        Constants.ROW_OPERATION.map((button, index) => {
+                            let className = button === '=' ? 'equals' : '';
+                            return (
+                                <Button name={button} key={index} clickHandler={this.handleClick} applyClass={className} />
+                            );
+                        })
+                    }
                 </section>
             </div>
         );

@@ -19,7 +19,8 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div className="container">
+				<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 				<Result
 					result={this.state.numberString || Constants.ZERO} current={this.state.currentNumber}
 				/>
