@@ -26,7 +26,7 @@ export default function calculate(obj, buttonName) {
         }
 
         // Replace the currentNumber after user clicks '='
-        if (obj.currentNumber === Constants.ZERO) {
+        if (obj.currentNumber === Constants.ZERO && obj.operation === Constants.EQUAL) {
             return {
                 numberString: buttonName,
                 currentNumber: buttonName,
@@ -74,8 +74,13 @@ export default function calculate(obj, buttonName) {
     */
     if (obj.operation || (buttonName !== Constants.EQUAL && obj.numberString.endsWith(Constants.DECIMAL))) {
 
-        // Avoid adding '=' when user directly clicks it after '.'
-        let sanitisedString = obj.numberString.substring(0, obj.numberString.length - 1);
+
+        let sanitisedString = obj.numberString;
+
+        // Avoid adding '=' when user directly clicks it after '.' and doesn't remove characters on multiple clicks of '='
+        if (obj.numberString.endsWith(Constants.DECIMAL) || Constants.ROW_OPERATION.includes(obj.numberString.slice(-1))) {
+            sanitisedString = obj.numberString.substring(0, obj.numberString.length - 1);
+        }
 
         return {
             numberString: buttonName === Constants.EQUAL ? sanitisedString : sanitisedString + buttonName,
@@ -92,7 +97,7 @@ export default function calculate(obj, buttonName) {
             {
                 numberString: operate(obj.numberString),
                 currentNumber: Constants.ZERO,
-                operation: null
+                operation: buttonName
             } : Constants.EMPTY_RESULT;
     }
 

@@ -1,7 +1,7 @@
 const ROW_ONE = ["7", "8", "9"];
 const ROW_TWO = ["4", "5", "6"];
 const ROW_THREE = ["1", "2", "3"];
-const ROW_FOUR = ["AC", "0", "."];
+const ROW_FOUR = [".", "0", "="];
 
 const Constants = {
     EMPTY_RESULT: {
@@ -19,7 +19,7 @@ const Constants = {
     OPERATION_REGEX: /[+-/*]+$/g,
     NUMBER_REGEX: /[0-9]+$/,
     NUMBER_LAYOUT: [ROW_ONE, ROW_TWO, ROW_THREE, ROW_FOUR],
-    ROW_OPERATION: ["+", "-", "="]
+    ROW_OPERATION: ["AC","/", "*", "+", "-"]
 }
 
 export default Constants;
