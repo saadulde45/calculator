@@ -1,4 +1,5 @@
 import operate from './operate';
+import Constants from '../constants/constants';
 
 /*
  * Based on the buttonName, the numberString is updated and returned.
@@ -10,26 +11,22 @@ import operate from './operate';
  */
 
 export default function calculate(obj, buttonName) {
-    
-    const IsNumber = function (string) {
-        return /[0-9]+/.test(string);
-    };
 
-    if (buttonName === 'AC') {
-        return {
-            numberString: '0',
-            currentNumber: '0',
-            operation: null
-        };
+    // When user clicks 'AC'
+    if (buttonName === Constants.ALL_CLEAR) {
+        return Constants.EMPTY_RESULT;
     }
 
-    if (IsNumber(buttonName)) {
+    // When the user clicks any numeric button
+    if (Constants.IsNumber(buttonName)) {
 
-        if (buttonName === '0' && obj.numberString === '0') {
+        // To handle consecutive 0's entered at the beginning
+        if (buttonName === Constants.ZERO && obj.numberString === Constants.ZERO) {
             return {};
         }
 
-        if(obj.currentNumber === '0') {
+        // Replace the currentNumber after user clicks '='
+        if (obj.currentNumber === Constants.ZERO) {
             return {
                 numberString: buttonName,
                 currentNumber: buttonName,
@@ -39,27 +36,30 @@ export default function calculate(obj, buttonName) {
 
         // If there is no operator then update the numberString
         return {
-            numberString: obj.numberString !== '0' ? obj.numberString + buttonName : buttonName,
+            numberString: obj.numberString !== Constants.ZERO ? obj.numberString + buttonName : buttonName,
             currentNumber: obj.currentNumber + buttonName,
             operation: null
         };
     }
 
-    if (buttonName === '.') {
-        
-        if(obj.currentNumber === '0' && obj.numberString === '0') {
-            
+    // When the user clicks '.'
+    if (buttonName === Constants.DECIMAL) {
+
+        // When the user directly clicks '.', append a 0 before it
+        if (obj.currentNumber === Constants.ZERO && obj.numberString === Constants.ZERO) {
+
             return {
-                numberString: "0" + buttonName,
-                currentNumber: "0" + buttonName,
+                numberString: Constants.ZERO + buttonName,
+                currentNumber: Constants.ZERO + buttonName,
                 operation: null
             };
         }
 
-        if(!obj.currentNumber.includes(buttonName)) {
-            let number = obj.currentNumber === "0" ? "0" + buttonName : buttonName;
+        // Prevent adding multiple decimals
+        if (!obj.currentNumber.includes(buttonName)) {
+            let number = obj.currentNumber === Constants.ZERO ? Constants.ZERO + buttonName : buttonName;
             return {
-                numberString: obj.numberString !== '0' ? obj.numberString + number : number,
+                numberString: obj.numberString !== Constants.ZERO ? obj.numberString + number : number,
                 currentNumber: obj.currentNumber + buttonName,
                 operation: obj.operation
             }
@@ -72,37 +72,34 @@ export default function calculate(obj, buttonName) {
      * Replace the previous operation with the current one
      * Assign the new operation to 'operation'
     */
-    if (obj.operation || (buttonName !== '=' && obj.numberString.endsWith("."))) {
+    if (obj.operation || (buttonName !== Constants.EQUAL && obj.numberString.endsWith(Constants.DECIMAL))) {
 
+        // Avoid adding '=' when user directly clicks it after '.'
         let sanitisedString = obj.numberString.substring(0, obj.numberString.length - 1);
 
         return {
-            numberString: buttonName === '=' ? sanitisedString : sanitisedString + buttonName,
-            currentNumber: '0',
+            numberString: buttonName === Constants.EQUAL ? sanitisedString : sanitisedString + buttonName,
+            currentNumber: Constants.ZERO,
             operation: buttonName
         }
     }
 
-    if (buttonName === '=') {
+    // When the user clicks '='
+    if (buttonName === Constants.EQUAL) {
 
         // Return empty when '=' is pressed with no operation
-        return (obj.numberString !== '0') ?
+        return (obj.numberString !== Constants.ZERO) ?
             {
                 numberString: operate(obj.numberString),
-                currentNumber: '0',
+                currentNumber: Constants.ZERO,
                 operation: null
-            } :
-            {
-                numberString: '0',
-                currentNumber: '0',
-                operation: null
-            };
+            } : Constants.EMPTY_RESULT;
     }
 
     // Return the latest changes
     return {
         numberString: obj.numberString + buttonName,
-        currentNumber: '0',
+        currentNumber: Constants.ZERO,
         operation: buttonName
     };
 }
