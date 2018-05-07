@@ -10,7 +10,9 @@ const Constants = {
     EQUAL: '=',
     IsNumber: (string) => {
         return /[0-9]+/.test(string);
-    }
+    },
+    OPERATION_REGEX: /[+-/*]+$/g,
+    NUMBER_REGEX: /[0-9]+$/
 }
 
 export default Constants;
