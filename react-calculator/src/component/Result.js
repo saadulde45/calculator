@@ -17,6 +17,7 @@ class Result extends React.Component {
 }
 
 Result.propTypes = {
-    result: PropTypes.string
+    result: PropTypes.string,
+    current: PropTypes.string
 }
 export default Result;

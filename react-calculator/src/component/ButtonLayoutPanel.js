@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './Button';
 import PropTypes from 'prop-types';
+import Constants from '../constants/constants';
 
 class ButtonLayoutPanel extends React.Component {
 
@@ -13,33 +14,32 @@ class ButtonLayoutPanel extends React.Component {
             <div>
                 {/* Number section */}
                 <section>
-                    <div>
-                        <Button name="7" clickHandler={this.handleClick} />
-                        <Button name="8" clickHandler={this.handleClick} />
-                        <Button name="9" clickHandler={this.handleClick} />
-                    </div>
-                    <div>
-                        <Button name="4" clickHandler={this.handleClick} />
-                        <Button name="5" clickHandler={this.handleClick} />
-                        <Button name="6" clickHandler={this.handleClick} />
-                    </div>
-                    <div>
-                        <Button name="1" clickHandler={this.handleClick} />
-                        <Button name="2" clickHandler={this.handleClick} />
-                        <Button name="3" clickHandler={this.handleClick} />
-                    </div>
-                    <div>
-                        <Button name="AC" clickHandler={this.handleClick} />
-                        <Button name="0" clickHandler={this.handleClick} />
-                        <Button name="." clickHandler={this.handleClick} />
-                    </div>
+                    {
+                        Constants.NUMBER_LAYOUT.map((row, index) => {
+                            return (
+                                <div key={index}>
+                                    {
+                                        row.map((button, index) => {
+                                            return (
+                                                <Button key={index} name={button} clickHandler={this.handleClick} />
+                                            );
+                                        })
+                                    }
+                                </div>
+                            );
+                        })
+                    }
                 </section>
                 {/* Operation section */}
                 <section>
                     <div>
-                        <Button name="+" clickHandler={this.handleClick} />
-                        <Button name="-" clickHandler={this.handleClick} />
-                        <Button name="=" clickHandler={this.handleClick} />
+                        {
+                            Constants.ROW_OPERATION.map((button, index) => {
+                                return (
+                                    <Button name={button} key={index} clickHandler={this.handleClick} />
+                                );
+                            })
+                        }
                     </div>
                 </section>
             </div>
