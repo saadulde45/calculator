@@ -38,6 +38,7 @@ body {
         background-color: #303030;
         border-radius: 15px;
         padding: 35px 15px;
+        box-shadow: 5px 5px 20px #303030;
         .result-container {
             @include flexbox();
             flex-direction: column-reverse;

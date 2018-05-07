@@ -37,7 +37,7 @@ export default function calculate(obj, buttonName) {
         // If there is no operator then update the numberString
         return {
             numberString: obj.numberString !== Constants.ZERO ? obj.numberString + buttonName : buttonName,
-            currentNumber: obj.currentNumber + buttonName,
+            currentNumber: obj.currentNumber === Constants.ZERO ? buttonName : obj.currentNumber + buttonName,
             operation: null
         };
     }
@@ -60,7 +60,7 @@ export default function calculate(obj, buttonName) {
             let number = obj.currentNumber === Constants.ZERO ? Constants.ZERO + buttonName : buttonName;
             return {
                 numberString: obj.numberString !== Constants.ZERO ? obj.numberString + number : number,
-                currentNumber: obj.currentNumber + buttonName,
+                currentNumber: obj.currentNumber === Constants.ZERO ? buttonName : obj.currentNumber + buttonName,
                 operation: obj.operation
             }
         } else {
