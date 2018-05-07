@@ -21,7 +21,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Result
-					result={this.state.numberString || '0'}
+					result={this.state.numberString || '0'} current={this.state.currentNumber}
 				/>
 				<ButtonLayoutPanel
 					clickHandler={this.handleClick}

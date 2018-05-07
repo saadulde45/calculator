@@ -5,7 +5,12 @@ class Result extends React.Component {
     render() {
         return (
             <div>
-                {this.props.result}
+                <div>
+                    {this.props.result}
+                </div>
+                <div>
+                    {this.props.current}
+                </div>
             </div>
         );
     }

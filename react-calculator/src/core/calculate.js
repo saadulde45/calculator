@@ -29,6 +29,14 @@ export default function calculate(obj, buttonName) {
             return {};
         }
 
+        if(obj.currentNumber === '0') {
+            return {
+                numberString: buttonName,
+                currentNumber: buttonName,
+                operation: null
+            };
+        }
+
         // If there is no operator then update the numberString
         return {
             numberString: obj.numberString !== '0' ? obj.numberString + buttonName : buttonName,
@@ -38,13 +46,21 @@ export default function calculate(obj, buttonName) {
     }
 
     if (buttonName === '.') {
+        
+        if(obj.currentNumber === '0' && obj.numberString === '0') {
+            return {
+                numberString: "0" + buttonName,
+                currentNumber: "0" + buttonName,
+                operation: null
+            };
+        }
 
         if(!obj.currentNumber.includes(buttonName)) {
             let number = obj.currentNumber === "0" ? "0" + buttonName : buttonName;
             return {
                 numberString: obj.numberString !== '0' ? obj.numberString + number : number,
                 currentNumber: obj.currentNumber + buttonName,
-                operation: null
+                operation: obj.operation
             }
         } else {
             return obj;
@@ -55,7 +71,7 @@ export default function calculate(obj, buttonName) {
      * Replace the previous operation with the current one
      * Assign the new operation to 'operation'
     */
-    if (obj.operation || obj.numberString.endsWith(".")) {
+    if (obj.operation || (buttonName !== '=' && obj.numberString.endsWith("."))) {
 
         return {
             numberString: obj.numberString.substring(0, obj.numberString.length - 1) + buttonName,
@@ -67,7 +83,7 @@ export default function calculate(obj, buttonName) {
     if (buttonName === '=') {
 
         // Return empty when '=' is pressed with no operation
-        return (obj.numberString !== '0') ?
+        return (sanitisedString !== '0') ?
             {
                 numberString: operate(obj.numberString),
                 currentNumber: '0',
