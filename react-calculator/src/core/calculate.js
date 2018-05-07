@@ -10,9 +10,6 @@ import operate from './operate';
  */
 
 export default function calculate(obj, buttonName) {
-
-    console.log("first", obj, buttonName);
-
     
     const IsNumber = function (string) {
         return /[0-9]+/.test(string);
@@ -33,7 +30,6 @@ export default function calculate(obj, buttonName) {
         }
 
         // If there is no operator then update the numberString
-        console.log("while setting next number", obj, obj.numberString !== '0' ? obj.numberString + buttonName : buttonName);
         return {
             numberString: obj.numberString !== '0' ? obj.numberString + buttonName : buttonName,
             currentNumber: obj.currentNumber + buttonName,
@@ -41,17 +37,25 @@ export default function calculate(obj, buttonName) {
         };
     }
 
+    if (buttonName === '.') {
+
+        if(!obj.currentNumber.includes(buttonName)) {
+            let number = obj.currentNumber === "0" ? "0" + buttonName : buttonName;
+            return {
+                numberString: obj.numberString !== '0' ? obj.numberString + number : number,
+                currentNumber: obj.currentNumber + buttonName,
+                operation: null
+            }
+        } else {
+            return obj;
+        }
+    }
+
     /* When the user presses operation in quick succession -
      * Replace the previous operation with the current one
      * Assign the new operation to 'operation'
     */
-    console.log("before setting operation", obj);
-    if (obj.operation) {
-        console.log("while setting operation", obj, {
-            numberString: obj.numberString.substring(0, obj.numberString.length - 1) + buttonName,
-            currentNumber: '0',
-            operation: buttonName
-        });
+    if (obj.operation || obj.numberString.endsWith(".")) {
 
         return {
             numberString: obj.numberString.substring(0, obj.numberString.length - 1) + buttonName,
@@ -60,26 +64,8 @@ export default function calculate(obj, buttonName) {
         }
     }
 
-    // if (buttonName === '.') {
-
-    //     if (obj.nextNumber) {
-    //         return obj.nextNumber.includes('.') ? {} : { nextNumber: obj.nextNumber + '.' };
-    //     }
-
-    //     if (obj.operation) {
-    //         return { nextNumber: '0.' };
-    //     }
-
-    //     if (obj.numberString) {
-    //         return obj.numberString.includes('.') ? {} : { numberString: obj.numberString + '.' };
-    //     }
-
-    //     return { numberString: '0.' };
-    // }
-
     if (buttonName === '=') {
 
-        console.log("ans", operate(obj.numberString, obj.operation));
         // Return empty when '=' is pressed with no operation
         return (obj.numberString !== '0') ?
             {
@@ -94,11 +80,6 @@ export default function calculate(obj, buttonName) {
             };
     }
 
-    console.log("returning last return", {
-        numberString: obj.numberString + buttonName,
-        currentNumber: '0',
-        operation: buttonName
-    });
     // Return the latest changes
     return {
         numberString: obj.numberString + buttonName,
