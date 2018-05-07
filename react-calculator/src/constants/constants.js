@@ -11,16 +11,19 @@ const Constants = {
         "operation": null
     },
     ZERO: '0',
+    DOUBLE_ZERO: '00',
     ALL_CLEAR: 'AC',
     DECIMAL: '.',
     EQUAL: '=',
+    NEGATE: "+/-",
     IsNumber: (string) => {
         return /[0-9]+/.test(string);
     },
     OPERATION_REGEX: /[+-/*]+$/g,
     NUMBER_REGEX: /[0-9]+$/,
     NUMBER_LAYOUT: [ROW_ONE, ROW_TWO, ROW_THREE, ROW_FOUR, ROW_FIFTH],
-    ROW_OPERATION: ["/", "*", "+", "-", "="]
+    ROW_OPERATION: ["/", "*", "+", "-", "="],
+    SUPPORTED_OPERATIONS: ["/", "*", "+", "-", "%"]
 }
 
 export default Constants;

@@ -46,18 +46,19 @@ body {
             border-bottom: 1px solid #888888;
             text-align: right;
             margin: 0 15px;
+            overflow-x: hidden;
             .operation-list {
                 color: #888888;
                 font-size: 15px;
-                align-self: flex-end;
                 order: 2;
                 padding-right: 5px;
+                word-wrap: break-word;
             }
             .result {
                 font-size: 65px;
                 line-height: 1.2em;
-                align-self: flex-end;
                 order: 1;
+                word-wrap: break-word;
             }
         }
         .button-container {
