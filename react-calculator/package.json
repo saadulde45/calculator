@@ -4,7 +4,9 @@
   "private": true,
   "homepage": "http://saadulde45.github.io/react-calculator/build",
   "devDependencies": {
-    "gh-pages": ""
+    "gh-pages": "",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",

@@ -3,6 +3,7 @@ import Result from './Result';
 import ButtonLayoutPanel from './ButtonLayoutPanel';
 import calculate from '../core/calculate';
 import Constants from '../constants/constants';
+import './App.scss';
 
 class App extends Component {
 	
